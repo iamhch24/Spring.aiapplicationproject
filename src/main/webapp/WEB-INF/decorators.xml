@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- default directory 설정 -->
+
+<decorators defaultdir="/WEB-INF/views">
+
+	<!-- sample -->
+	<decorator name="layout_header" page="layout/layout_header.jsp" />
+	<decorator name="layout_content" page="layout/layout_content.jsp" />
+	<decorator name="layout_leftmenu" page="layout/layout_left.jsp" />
+	<decorator name="layout_bottom" page="layout/layout_bottom.jsp" />
+	<decorator name="default" page="layout/layout.jsp" />
+	<decorator name="home" page="layout/layout.jsp">
+		<pattern>/</pattern>
+	</decorator>
+	
+	<!-- decorators를 적용시키지 않을 url 패턴 -->
+	<excludes>
+<!-- 		<pattern>/memberList</pattern> -->
+	</excludes>
+
+</decorators>

@@ -1,0 +1,43 @@
+*,html,body {
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.header {
+	height: 10vh;
+	width: 100vw;
+	padding-top: 50px;
+	background-color: #A52A2A;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-content: center;
+}
+
+nav {
+	height: 60vh;
+	background-color: #0E6EB8;
+}
+
+section {
+	height: 60vh;
+	background-color: #32CD32;
+}
+
+footer {
+	height: 10vh;
+	background-color: #A0A0A0;
+}
+
+.ui.placeholder.segment {
+	height: 50vh;
+}
+
+
+.icon {
+	color: #28a745;
+}
+
+.asterisk.icon {
+	color: #FF1493;
+}

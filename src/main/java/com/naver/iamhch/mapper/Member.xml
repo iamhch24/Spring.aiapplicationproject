@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.naver.iamhch.service.MemberDao">
+	<resultMap type="com.naver.iamhch.entities.Member" id="memberMap">
+		<id property="email" column="email" />
+		<id property="name" column="name" />
+		<id property="password" column="password" />
+		<id property="phone" column="phone" />
+		<id property="memlevel" column="memlevel" />
+		<id property="photo" column="photo" />
+	</resultMap>
+		
+	<select id="memberOne" parameterType="String" resultMap="memberMap">
+		select * from member where email=#{email}
+	</select>	
+
+	<select id="memberAll" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<insert id="memberInsert" parameterType="hashMap">
+		insert into member (email, name, password, phone, photo)
+		values(#{email}, #{name}, #{password}, #{phone}, #{photo})
+	</insert>
+	
+	
+</mapper>
