@@ -30,6 +30,7 @@
 					<div class="ui two column very relaxed stackable grid">
 						<div class="column">
 							<form class="ui form" method="post" action="loginUp">
+								<p style="color:#ff0000"> log in failed </p>
 								<div class="field">
 									<label>E-mail</label>
 									<div class="ui left icon input">

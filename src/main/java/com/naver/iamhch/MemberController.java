@@ -3,8 +3,11 @@ package com.naver.iamhch;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.naver.iamhch.entities.Board;
 import com.naver.iamhch.entities.Member;
 import com.naver.iamhch.service.MemberDao;
+
+
 
 @Controller
 public class MemberController {
@@ -26,7 +32,9 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-	
+	@Autowired
+	Board board;
+
 	@RequestMapping(value = "/emailConfirmAjax", method = RequestMethod.POST)
 	@ResponseBody
 	public String emailConfirmAjax(@RequestParam String email) {
@@ -46,10 +54,54 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		
+//		Board board = new Board();
+		board.setId("korea");
+		board.setName("김한국");
+		
+		
 		
 		return "login/login";
 	}
 
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Locale locale, Model model,HttpSession session) {
+
+		session.invalidate();		
+		
+		return "redirect:index";
+	}
+	
+	
+	@RequestMapping(value = "/loginUp", method = RequestMethod.POST)
+	public String loginup(Locale locale, Model model, @ModelAttribute Member member, HttpSession session) {
+		System.out.println("loginUp");
+		
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		Member data = dao.memberOne(member.getEmail());
+		if(data==null){
+			return "login/login_failed";
+		}else{
+			
+			boolean passchk=BCrypt.checkpw(member.getPassword(), data.getPassword());
+			System.out.println("===============success===data:"+data.getEmail()+", check:"+passchk);
+			if (passchk) {
+				session.setAttribute("sessionemail", data.getEmail());
+				session.setAttribute("sessionname", data.getName());
+				session.setAttribute("sessionphoto", data.getPhoto());
+				session.setAttribute("sessionlevel", data.getMemlevel());
+				
+						
+				return "redirect:index";				
+			} else{
+				return "login/login_failed";
+			}
+			
+		}
+			
+	}	
 	
 	@RequestMapping(value = "/memberInsert", method = RequestMethod.GET)
 	public String memberInsert(Locale locale, Model model) {
@@ -66,7 +118,10 @@ public class MemberController {
 		System.out.println("===============success:member_insertSave:name ="+member.getName());
 		System.out.println("===============success:member_insertSave:pwd ="+member.getPassword());
 		System.out.println("===============success:member_insertSave:phone ="+member.getPhone());
-		
+		if(member.getPhoto() == null || member.getPhoto().equals("")){
+			member.setPhoto("resources/images/noimage.jpg");
+		}
+			
 //		DB접근 순서
 //		1. service/ DAO 인터페이스 에서 메서드 추가 	void memberInsert(Member member);
 //		2. mapper/ XLM 수정  ::  key&value 타입 들은 parameterType="hashMap" 설정함.

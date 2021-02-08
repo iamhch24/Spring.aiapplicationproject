@@ -29,4 +29,18 @@ $(document).ready(function() {
 				}
 			});
 	})
+	$('.ui.dropdown')
+	  .dropdown()
+	;
+	$('.combo.dropdown')
+	  .dropdown({
+	    action: 'combo'
+	  })
+	;
+	$('.dropdown')
+	  .dropdown({
+	    // you can use any ui transition
+	    transition: 'drop'
+	  })
+	;
 });
