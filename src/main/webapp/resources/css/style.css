@@ -15,12 +15,12 @@
 }
 
 nav {
-	height: 60vh;
+	height: 80vh;
 	background-color: #0E6EB8;
 }
 
 section {
-	height: 60vh;
+	height: 80vh;
 	background-color: #32CD32;
 }
 
@@ -41,3 +41,22 @@ footer {
 .asterisk.icon {
 	color: #FF1493;
 }
+
+.nicknameprofile{
+	width: 20px;
+	height: 20px;
+	border: 1px solid gray;
+	border-radius : 50%;
+	overflow: hidden;
+	
+}
+#viewphoto{
+	width: 100px;
+	height: 100px;
+	border: 1px solid gray;
+	border-radius : 50%;
+	overflow: hidden;
+	
+}
+
+#memberForm label.error { color:red; margin-left:20px; font-size: 2px;}

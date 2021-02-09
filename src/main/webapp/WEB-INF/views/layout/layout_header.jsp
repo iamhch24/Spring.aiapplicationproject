@@ -22,8 +22,8 @@
 				<div class="ui simple dropdown item">
 					<img src="${sessionphoto}"/> <i class="dropdown icon"></i>
 					<div class="menu">
-						<div class="item"><a href="logout">logout</a></div>
-						<div class="item">정보수정</div>
+						<a class="item" href="logout">logout</a>
+						<a class="item" href="memberUpdate">정보수정</a>
 					</div>
 				</div>
 			</div>

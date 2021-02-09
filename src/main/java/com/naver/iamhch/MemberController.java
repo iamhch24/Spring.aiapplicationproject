@@ -1,6 +1,10 @@
 package com.naver.iamhch;
 
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.naver.iamhch.entities.Board;
 import com.naver.iamhch.entities.Member;
@@ -137,5 +142,64 @@ public class MemberController {
 		dao.memberInsert(member);
 		return "index";
 	}
+	
+	
+	
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
+	public String memberUpdate(Locale locale, Model model, HttpSession session) {
+		String email = (String) session.getAttribute("sessionemail");
+		System.out.println("===============success:email"+email);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		Member row = dao.memberOne(email);
+		model.addAttribute("row",row);
+//		System.out.println("===============success:count"+count);
+		return "member/member_update";
+	}
 
+	
+		
+	@RequestMapping(value = "/member_updateSave", method = RequestMethod.POST)
+	public String member_updateSave(Model model, HttpSession session, Member member, @RequestParam CommonsMultipartFile imgfile ) throws IOException {
+//		System.out.println("---------------------success");
+		
+//		System.out.println("---> filename:"+imgfile.getOriginalFilename());
+//		System.out.println("---> filename:"+member.getOldphoto());
+//		System.out.println("---> email"+member.getEmail());
+		String filename = imgfile.getOriginalFilename();
+		String path = "D:/Code/Spring/AIApplicationProject/src/main/webapp/resources/uploadimages/";
+		String realpath = "resources/uploadimages/";		//server path 
+		
+		
+		if(filename.equals("")){
+			member.setPhoto(member.getOldphoto());
+		}else{
+			String cutemail = member.getEmail().substring(0, member.getEmail().indexOf("@"));
+			byte bytes[] = imgfile.getBytes();
+			try {
+				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path+cutemail+filename));
+				output.write(bytes);
+				output.flush();
+				output.close();
+				member.setPhoto(realpath+cutemail+filename);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("---> cutemail"+cutemail);
+		}
+		
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		dao.memberUpdate(member);
+		
+//		DB접근 순서
+//		1. service/ DAO 인터페이스 에서 메서드 추가 	void memberInsert(Member member);
+//		2. mapper/ XLM 수정  ::  key&value 타입 들은 parameterType="hashMap" 설정함.
+//		3. MemberDao dao = sqlSession.getMapper(MemberDao.class); // 매핑 실행
+//		4. dao.memberInsert(member);
+		
+
+		return "index";
+
+	}
 }

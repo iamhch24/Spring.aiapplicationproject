@@ -7,8 +7,18 @@ public class Member {
 	private String phone;
 	private int memlevel;
 	private String photo;
+	private String oldphoto;
+	
 
 	
+	public String getOldphoto() {
+		return oldphoto;
+	}
+
+	public void setOldphoto(String oldphoto) {
+		this.oldphoto = oldphoto;
+	}
+
 	public String getEmail() {
 		return email;
 	}

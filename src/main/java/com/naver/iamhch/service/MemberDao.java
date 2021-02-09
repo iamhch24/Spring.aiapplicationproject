@@ -7,8 +7,7 @@ public interface MemberDao {
 	int memberAll();
 	void memberInsert(Member member);
 	Member memberOne(String email);
-
-	
+	void memberUpdate(Member member);
 	
 }
 

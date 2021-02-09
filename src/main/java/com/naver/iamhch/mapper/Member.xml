@@ -28,5 +28,9 @@
 		values(#{email}, #{name}, #{password}, #{phone}, #{photo})
 	</insert>
 	
+	<update id="memberUpdate" parameterType="hashMap">
+		update member set name=#{name}, password=#{password}, phone=#{phone}, photo=#{photo} 
+		where email = #{email} 
+	</update>
 	
 </mapper>

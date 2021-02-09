@@ -17,9 +17,10 @@
 
 <!-- Semantic UI CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-<link rel="stylesheet" href="resources/css/mystyle.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <script src="resources/js/jquery-3.4.1.js"></script> 
 <script	src="resources/js/jquery.validate.js"></script> 
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script	src="resources/js/semantic.min.js"></script> 
 <script	src="resources/js/aiappproject.js"></script> 
 </content>

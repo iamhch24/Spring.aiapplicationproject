@@ -30,7 +30,6 @@
 
 .asterisk.icon {
 	color: #FF1493;
-	
 }
 
 .ui.grid {
@@ -40,86 +39,91 @@
 </style>
 
 <body>
-<section>
-	<div class="ui grid body">
-		<div class="two wide column"></div>
-		<div class="twelve wide column">
+	<section>
+		<div class="ui grid body">
+			<div class="two wide column"></div>
+			<div class="twelve wide column">
 
-			<div class="ui placeholder segment">
-				<div class="ui two column very relaxed stackable grid">
-					<div class="middle aligned column">
-						<button class="ui big button" onclick="location.href='login'">
-							<i class="signup icon"></i> Log in
-						</button>
+				<div class="ui placeholder segment">
+					<div class="ui two column very relaxed stackable grid">
+						<div class="middle aligned column">
+							<button class="ui big button" onclick="location.href='login'">
+								<i class="signup icon"></i> Log in
+							</button>
+						</div>
+						<div class="column">
+							<form class="ui form" method="post" action="member_insertSave"
+								id="memberForm">
+								<input type="hidden" class="confirmyn" value="n">
+								<div class="field">
+									<label>E-mail</label>
+									<div class="ui samll corner labeled left icon input">
+										<input placeholder="e-mail" type="email" name="email"
+											id="email" required "> <i
+											class="icon envelope"></i>
+										<div class="ui corner label">
+											<i class="asterisk icon"></i>
+										</div>
+										<button class="mini ui basic button primary confirm"
+											type="button">check</button>
+									</div>
+									<label id="email-error" class="error" for="email"> </label>
+								</div>
+								<div class="field">
+									<label>Username</label>
+									<div class="ui samll corner labeled left icon input">
+										<input placeholder="Username" type="text" name="name" required onclick="confirmyn()"> <i class="icon user"></i>
+										<div class="ui corner label">
+											<i class="asterisk icon"></i>
+										</div>
+									</div>
+									<label id="name-error" class="error" for="name"></label>
+								</div>
+								<div class="field">
+									<label>Password</label>
+									<div class="ui samll corner labeled left icon input">
+										<input placeholder="Password" type="password" name="password"
+											required> <i class="icon lock"></i>
+										<div class="ui corner label">
+											<i class="asterisk icon"></i>
+										</div>
+									</div>
+									<label id="password-error" class="error" for="password"></label>
+								</div>
+								<div class="field">
+									<label>Phone-number</label>
+									<div class="ui samll left icon input">
+
+										<input placeholder="Phone" type="tel" name="phone"> <i
+											class="icon phone"></i>
+									</div>
+									<label id="phone-error" class="error" for="phone"></label>
+								</div>
+								<div class="field middle aligned">
+									<div class="ui buttons">
+										<button class="ui positive button" type="button" id="SignUp">Sign
+											Up</button>
+										<button class="ui button" type="reset">clear</button>
+
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
-					<div class="column">
-						<form class="ui form" method="post" action="member_insertSave">
-
-							<div class="field">
-								<label>E-mail</label>
-								<div class="ui samll corner labeled left icon input">
-									<input placeholder="e-mail" type="email" name="email"
-										id="email" required> <i class="icon envelope"></i>
-									<div class="ui corner label">
-										<i class="asterisk icon"></i>
-									</div>
-									<button class="mini ui basic button primary confirm"
-										type="button">check</button>
-								</div>
-							</div>
-							<div class="field">
-								<label>Username</label>
-								<div class="ui samll corner labeled left icon input">
-									<input placeholder="Username" type="text" name="name" required>
-									<i class="icon user"></i>
-									<div class="ui corner label">
-										<i class="asterisk icon"></i>
-									</div>
-								</div>
-							</div>
-							<div class="field">
-								<label>Password</label>
-								<div class="ui samll corner labeled left icon input">
-									<input placeholder="Password" type="password" name="password"
-										required> <i class="icon lock"></i>
-									<div class="ui corner label">
-										<i class="asterisk icon"></i>
-									</div>
-								</div>
-							</div>
-							<div class="field">
-								<label>Phone-number</label>
-								<div class="ui samll left icon input">
-
-									<input placeholder="Phone" type="tel" name="phone"> <i
-										class="icon phone"></i>
-								</div>
-							</div>
-							<div class="field middle aligned">
-								<div class="ui buttons">
-									<button class="ui positive button" type="submit">Sign
-										Up</button>
-									<button class="ui button" type="button">clear</button>
-
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="ui vertical divider">Or</div>
-			</div>
-		</div>
-		<div class="ui mini modal">
-			<i class="close icon"></i>
-			<div class="header modalmsg">E-mail 중복체크</div>
-			<div class="actions">
-				<div class="ui negative button">Close</div>
-				<div class="ui positive right labeled icon button">
-					Yes <i class="checkmark icon"></i>
+					<div class="ui vertical divider">Or</div>
 				</div>
 			</div>
+			<div class="ui mini modal">
+				<i class="close icon"></i>
+				<div class="header modalmsg">E-mail 중복체크</div>
+				<div class="actions">
+					<div class="ui negative button">Close</div>
+					<div class="ui positive right labeled icon button">
+						Yes <i class="checkmark icon"></i>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 </body>
 </html>
