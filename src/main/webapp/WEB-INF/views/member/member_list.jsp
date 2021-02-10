@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +10,7 @@
 <title>Home</title>
 </head>
 <content tag="local_script"> <script type="text/javascript">
-	alert("local_script");
+	
 </script> </content>
 <body>
 	<section>
@@ -22,9 +21,7 @@
 				<div class="content">
 					<div class="msg-header" id="resultmessage">수정되었습니다.</div>
 				</div>
-
 			</div>
-
 			<table id="memberExample" class="display nowrap" style="width: 100%">
 				<thead>
 					<tr>
@@ -56,12 +53,12 @@
 				<div class="header modalmsg">정말 삭제하시겠습니까?</div>
 				<div class="actions">
 					<div class="ui negative button" id="deleteOK">Yes 삭제</div>
-					<div class="ui positive right labeled icon button" id="deleteCancel">
+					<div class="ui positive right labeled icon button"
+						id="deleteCancel">
 						No 취소<i class="checkmark icon"></i>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</section>
 </body>

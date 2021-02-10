@@ -12,12 +12,10 @@
 		<id property="memlevel" column="memlevel" />
 		<id property="photo" column="photo" />
 	</resultMap>
-
 		
 	<select id="memberOne" parameterType="String" resultMap="memberMap">
 		select * from member where email=#{email}
 	</select>	
-
 
 	<select id="memberAll" resultType="int">
 		select count(*) from member
@@ -47,6 +45,4 @@
 		select * from member;
 	</select>
 
-
-	
 </mapper>
