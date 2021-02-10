@@ -24,41 +24,39 @@
 <body>
 	<section>
 		<div class="ui grid body">
-			<div class="two wide column"></div>
-			<div class="twelve wide column">
-				<div class="ui placeholder segment">
-					<div class="ui two column very relaxed stackable grid">
-						<div class="column">
-							<form class="ui form" method="post" action="loginUp">
-								<div class="field">
-									<label>E-mail</label>
-									<div class="ui left icon input">
-										<input type="text" placeholder="e-mail" name="email" required>
-										<i class="user icon"></i>
-									</div>
+			<div class="ui placeholder segment">
+				<div class="ui two column very relaxed stackable grid">
+					<div class="ui vertical divider">Or</div>
+					<div class="column">
+						<form class="ui form" method="post" action="loginUp">
+							<div class="field">
+								<label>E-mail</label>
+								<div class="ui left icon input">
+									<input type="text" placeholder="e-mail" name="email" required>
+									<i class="user icon"></i>
 								</div>
-								<div class="field">
-									<label>Password</label>
-									<div class="ui left icon input">
-										<input type="password" name="password" required> <i
-											class="lock icon"></i>
-									</div>
+							</div>
+							<div class="field">
+								<label>Password</label>
+								<div class="ui left icon input">
+									<input type="password" name="password" required> <i
+										class="lock icon"></i>
 								</div>
-								<button class="ui positive button" type="submit">Login</button>
-							</form>
-						</div>
+							</div>
+							<button class="ui positive button" type="submit">Login</button>
+						</form>
 					</div>
+
 					<div class="middle aligned column">
 						<button class="ui big button"
 							onclick="location.href='memberInsert'">
 							<i class="signup icon"></i>Sign Up
 						</button>
+
 					</div>
+
 				</div>
-				<div class="ui vertical divider">Or</div>
 			</div>
-		</div>
-		<div class="two wide column"></div>
 		</div>
 
 	</section>

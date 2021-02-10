@@ -67,7 +67,7 @@
 										<button class="mini ui basic button primary confirm"
 											type="button">check</button>
 									</div>
-									<label id="email-error" class="error" for="email"> </label>
+									<label id="email-error" class="error" for="email"></label>
 								</div>
 								<div class="field">
 									<label>Username</label>

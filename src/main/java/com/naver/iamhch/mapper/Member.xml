@@ -33,4 +33,20 @@
 		where email = #{email} 
 	</update>
 	
+	<update id="memberLevelUpdate">
+		update member set memlevel = #{memlevel} 
+		where email = #{email} 
+	</update>
+
+	<delete id="memberLevelDelete">
+		delete from member 
+		where email = #{email} 
+	</delete>
+	
+	<select id="memberList" resultMap="memberMap">
+		select * from member;
+	</select>
+
+
+	
 </mapper>

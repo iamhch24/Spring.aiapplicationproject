@@ -9,6 +9,8 @@ function confirm_email(){
 }
 
 $(document).ready(function() {
+	$('#profile').dropdown();
+	
 	$('.confirm').on('click', function() {
 		const email = $('#email').val();
 		const name = 'iamhch';
@@ -62,4 +64,84 @@ $(document).ready(function() {
 		$("#memberForm").submit();
 		
 	});
+	
+    $('#memberExample').DataTable( {
+        deferRender:    true,
+        scrollY:        400,
+        scrollCollapse: true,
+        scroller:       true
+    } );
+
+    
+    $(document).on('click','#memberExample td #editbtn',function(){
+    	var row = $(this).closest('tr');
+    	var td = row.children();
+    	var email = td.eq(1).text();
+    	var level = td.eq(4).children().val();
+    	
+	
+    	$.ajax({
+			type : 'POST',
+			data : {email:email,memlevel:level},
+			datatype : 'json',
+			url : 'memberUpdateAjax',
+			success : function(data) {
+				if(data ==='Y'){$('#resultmessage').text("성공적으로 수정되었습니다."); }
+				else{$('#resultmessage').text("수정되지 않았습니다. 확인이 필요합니다."); }
+				
+				$('#successmessage').css('display',"block")
+				.delay(1200).queue(function(){
+					$('#successmessage').css('display',"none").dequeue();
+				});
+			},
+			error : function(xhr, status, error) {
+				alert('ajax error:'+xhr.status+error);
+			}
+		});
+    	
+    });
+    $(document).on('click','#memberExample td #deletebtn',function(){
+    	var row = $(this).closest('tr');
+    	var td = row.children();
+    	var email = td.eq(1).text();
+    	
+//    	$('.modalmsg').text("E-mail을 입력하세요");
+		$('.mini.modal').modal('show');
+		
+		$('#deleteOK').on('click',function(){
+			$.ajax({
+				type : 'POST',
+				data : {email:email},
+				datatype : 'json',
+				url : 'memberDeleteAjax',
+				success : function(data) {
+					if(data ==='Y')	{
+						$('#resultmessage').text("성공적으로 삭제되었습니다.");
+						row.remove();
+					}
+					else{$('#resultmessage').text("삭제되지 않았습니다. 확인이 필요합니다."); }
+					
+					$('#successmessage').css('display',"block")
+					.delay(1200).queue(function(){
+						$('#successmessage').css('display',"none").dequeue();
+					});
+					
+					$('.mini.modal').modal('hide');
+				},
+				error : function(xhr, status, error) {
+					alert('ajax error:'+xhr.status+error);
+				}
+				
+			});
+			
+			
+		});
+		
+		$('#deleteCancel').on('click',function(){
+			$('.mini.modal').modal('hide');
+		});
+	
+    	
+    	
+    });
 });

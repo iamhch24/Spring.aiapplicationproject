@@ -1,5 +1,8 @@
 package com.naver.iamhch.entities;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Member {
 	private String email;
 	private String name;
@@ -8,7 +11,6 @@ public class Member {
 	private int memlevel;
 	private String photo;
 	private String oldphoto;
-	
 
 	
 	public String getOldphoto() {

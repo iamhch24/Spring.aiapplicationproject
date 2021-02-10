@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,11 @@ public class MemberController {
 	BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
+	Member member;
+	
+	@Autowired
 	Board board;
+
 
 	@RequestMapping(value = "/emailConfirmAjax", method = RequestMethod.POST)
 	@ResponseBody
@@ -202,4 +207,57 @@ public class MemberController {
 		return "index";
 
 	}
+	
+	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
+	public String memberList(Locale locale, Model model) {
+		
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		ArrayList<Member> members = dao.memberList();
+		System.out.println("===============success:count"+members.size());
+		
+		for(Member member : members){
+			System.out.println(member.getEmail());
+		}
+//		model.addAllAttributes(members);
+		model.addAttribute("members",members);
+		
+		return "member/member_list";
+	}
+	
+	
+	@RequestMapping(value = "/memberUpdateAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberUpdateAjax(@RequestParam String email, @RequestParam int memlevel) {
+
+		System.out.println("memberUpdateAjax :: email="+email+", memlevel="+memlevel);
+		member.setEmail(email);
+		member.setMemlevel(memlevel);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		int result = dao.memberLevelUpdate(member);
+		System.out.println("memberUpdateAjax :: result="+result );
+		if(result>0){
+			return "Y";
+		}else{
+			return "N";	
+		}
+		
+	}	
+
+	@RequestMapping(value = "/memberDeleteAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberDeleteAjax(@RequestParam String email) {
+
+		System.out.println("memberDeleteAjax :: email="+email);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class); // 세션에 매핑
+		int result = dao.memberLevelDelete(email);
+		System.out.println("memberDeleteAjax :: result="+result );
+		if(result>0){
+			return "Y";
+		}else{
+			return "N";	
+		}
+		
+	}	
+
+	
 }
